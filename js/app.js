@@ -80,5 +80,5 @@ $.each(obj, function(key, value) {
 
 
 
-// .hide()
+// .hide() for when clicked and re-create the html.
 
