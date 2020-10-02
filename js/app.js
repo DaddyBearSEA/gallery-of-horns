@@ -5,12 +5,8 @@ let $horns = $('.animals');
 
 let imgArr = [];
 
-$.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
-  .then(potato => {
-    potato.forEach(animalsVal => {
-      new Hornsgallery(animalsVal).renderJquery();
-    });
-  });
+
+
 function Hornsgallery(src) {
   this.src = src.image_url;
   // this.title = title;
@@ -21,12 +17,25 @@ function Hornsgallery(src) {
 }
 
 Hornsgallery.prototype.renderJquery = function () {
-  let $newUrl = $animalsTemplate.clone();
-  $animalsTemplate.find('img').attr('src', this.src);
-  // $newUrl.text(imageurl.image_url);
-  $horns.append($newUrl);
-
+  
+  let $newUrl = $horns.clone();  
+  $newUrl.find('img').attr('src', this.src);
+  // $newUrl.text("test");
+  $animalsTemplate.append($newUrl);  
 };
 
 
 
+//TODO: check the json as we went from 20 to 18 images.
+
+// .hide()
+
+$.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
+  .then(potato => {
+    potato.forEach(animalsVal => {
+      new Hornsgallery(animalsVal).renderJquery();
+      // imgArr.forEach(val => {
+      //   val.renderJquery();
+      // });
+    });
+  });
