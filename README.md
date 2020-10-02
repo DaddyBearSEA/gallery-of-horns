@@ -30,4 +30,7 @@ Actual time needed to complete: _____
 - found stackOverflow code but couldn't get it to work ran out of time.
 
 pushed to Cody
-Pushed to Michael
+Pushed to Michael  
+
+Cody submitted to Canvass
+Each will do the Retro

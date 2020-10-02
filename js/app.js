@@ -69,7 +69,6 @@ $.each(obj, function(key, value) {
 });
 */
 
-
 /* TODO:  Filter by Keyword
 1. User clicks on Dropdown - eventHandler?
 2. User Selects .select()  unique keywords from json file  --   DONE
@@ -77,8 +76,6 @@ $.each(obj, function(key, value) {
   b. load  " hide old /new images " when keyword is selected.
 
 */
-
-
 
 // .hide() for when clicked and re-create the html.
 
