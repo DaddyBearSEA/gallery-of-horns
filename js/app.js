@@ -10,6 +10,7 @@ $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
     potato.forEach(animalsVal => {
       new Hornsgallery(animalsVal).renderJquery();
     });
+
     populateDropdown();
     // numberSort();  //Sort by Number of Horns
     imgArr.forEach((typeOfAnimal) => {
@@ -19,16 +20,20 @@ $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
   );
 
 
+
 function Hornsgallery(src) {
   this.src = src.image_url;
   this.title = src.title;
   this.description = src.description;
   this.keyword = src.keyword;
+
   this.horns = src.horns;
+
   imgArr.push(this);
 }
 
 Hornsgallery.prototype.renderJquery = function () {
+
   
   let $newUrl = $horns.clone();  
   $newUrl.find('img').attr('src', this.src);
@@ -81,4 +86,5 @@ $.each(obj, function(key, value) {
 
 
 // .hide()
+
 
