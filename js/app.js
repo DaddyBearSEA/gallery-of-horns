@@ -2,7 +2,7 @@
 
 let $animalsTemplate = $('.animalsTemplate');
 let $horns = $('.animals');
-
+let keywordArray = [];
 let imgArr = [];
 
 $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
@@ -19,8 +19,6 @@ $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
   }
   );
 
-
-
 function Hornsgallery(src) {
   this.src = src.image_url;
   this.title = src.title;
@@ -33,8 +31,6 @@ function Hornsgallery(src) {
 }
 
 Hornsgallery.prototype.renderJquery = function () {
-
-
   let $newUrl = $horns.clone();
   $newUrl.find('img').attr('src', this.src);
   // $newUrl.text("test");
@@ -42,25 +38,21 @@ Hornsgallery.prototype.renderJquery = function () {
 };
 
 const populateDropdown = () => {
-  const keywordArray = [];
-  console.log(keywordArray);
+  const $default = $('select');
   imgArr.forEach((animal) => {
     if (keywordArray.includes(animal.keyword) === false) {
       keywordArray.push(animal.keyword);
     }
+
   });
-  // TODO: populated keyword dropdown not working??
+
   keywordArray.forEach((keyword) => {
-    console.log(keyword);
-    let defaultKeyword = document.createElement('keywordOption');
-    defaultKeyword.text = keywordArray[i].keyword;
-
-
-    $('#dropdown').append('<option value = ' + keyword + '> +  </option>');
-
+    const $newDefault = $(`<option value = '${keyword}'> ${keyword} </option>`);
+    $default.append($newDefault);
   });
 
 };
+
 
 /*
 https://stackoverflow.com/questions/36469696/how-to-get-distinct-value-in-dropdown
