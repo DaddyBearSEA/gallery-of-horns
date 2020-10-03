@@ -24,7 +24,6 @@ function Hornsgallery(src) {
   this.title = src.title;
   this.description = src.description;
   this.keyword = src.keyword;
-
   this.horns = src.horns;
 
   imgArr.push(this);
@@ -32,8 +31,10 @@ function Hornsgallery(src) {
 
 Hornsgallery.prototype.renderJquery = function () {
   let $newUrl = $horns.clone();
+  $newUrl.attr('class', `${this.keyword}`);
+  $newUrl.find('h2').text(this.title);
   $newUrl.find('img').attr('src', this.src);
-  // $newUrl.text("test");
+  $newUrl.find('p').text(this.description);
   $animalsTemplate.append($newUrl);
 };
 
@@ -43,28 +44,13 @@ const populateDropdown = () => {
     if (keywordArray.includes(animal.keyword) === false) {
       keywordArray.push(animal.keyword);
     }
-
   });
 
   keywordArray.forEach((keyword) => {
     const $newDefault = $(`<option value = '${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
   });
-
 };
-
-
-/*
-https://stackoverflow.com/questions/36469696/how-to-get-distinct-value-in-dropdown
-
-var usedNames = [];  // Line 40 keywordArray
-$.each(obj, function(key, value) {
-    if (usedNames.indexOf(value.name) == -1) {
-        $("#dropdown1").append("<option value=" + key + ">" + value.name + "</option>");
-        usedNames.push(value.name);
-    }
-});
-*/
 
 /* TODO:  Filter by Keyword
 1. User clicks on Dropdown - eventHandler?

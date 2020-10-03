@@ -1,10 +1,17 @@
-main {
+.animalsTemplate {
+  position: relative;
+  overflow: auto;
   width: 100%;
   display: flexbox;
   outline: 3px red dotted;
+  justify-content: center;
+}
+.animals {
+  outline: 3px black dashed;
+  flex-wrap: wrap;
+  outline: fuchsia 2px solid;
 }
 img {
   height: 200px;
   float: left;
-  
 }
