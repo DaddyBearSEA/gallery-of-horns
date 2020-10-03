@@ -1,8 +1,10 @@
 main {
   width: 100%;
-  display: inline-block;
+  display: flexbox;
   outline: 3px red dotted;
 }
 img {
   height: 200px;
+  float: left;
+  
 }
