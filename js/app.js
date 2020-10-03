@@ -31,15 +31,14 @@ function Hornsgallery(src) {
 }
 
 Hornsgallery.prototype.renderJquery = function () {
-  
-  let $newUrl = $horns.clone();  
+  let $newUrl = $horns.clone();
   $newUrl.find('img').attr('src', this.src);
   // $newUrl.text("test");
-  $animalsTemplate.append($newUrl); 
+  $animalsTemplate.append($newUrl);
 };
 
 const populateDropdown = () => {
-  const $default = $('select')
+  const $default = $('select');
   imgArr.forEach((animal) => {
     if (keywordArray.includes(animal.keyword) === false) {
       keywordArray.push(animal.keyword);
@@ -50,12 +49,6 @@ const populateDropdown = () => {
   keywordArray.forEach((keyword) => {
     const $newDefault = $(`<option value = '${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
-    let defaultKeyword = document.createElement('keywordOption');
-    defaultKeyword.text = keywordArray[i].keyword;
-
-
-    $('#dropdown').append('<option value = ' + keyword + '> +  </option>');
-
   });
 
 };
