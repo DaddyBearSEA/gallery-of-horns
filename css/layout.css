@@ -1,0 +1,8 @@
+main {
+  width: 100%;
+  display: inline-block;
+  outline: 3px red dotted;
+}
+img {
+  height: 200px;
+}
