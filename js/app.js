@@ -31,7 +31,7 @@ function Hornsgallery(src) {
 }
 
 Hornsgallery.prototype.renderJquery = function () {
-
+  
   let $newUrl = $horns.clone();  
   $newUrl.find('img').attr('src', this.src);
   // $newUrl.text("test");
@@ -47,16 +47,14 @@ const populateDropdown = () => {
 
   });
 
-
-
-// TODO: populated keyword dropdown not working??
-
   keywordArray.forEach((keyword) => {
     const $newDefault = $(`<option value = '${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
     let defaultKeyword = document.createElement('keywordOption');
-    // defaultKeyword.text = keywordArray[i].keyword;
-    // $('#dropdown').append($('<option></option>').text(this.keyword));
+    defaultKeyword.text = keywordArray[i].keyword;
+
+
+    $('#dropdown').append('<option value = ' + keyword + '> +  </option>');
 
   });
 
@@ -65,7 +63,7 @@ const populateDropdown = () => {
 
 /*
 https://stackoverflow.com/questions/36469696/how-to-get-distinct-value-in-dropdown
- 
+
 var usedNames = [];  // Line 40 keywordArray
 $.each(obj, function(key, value) {
     if (usedNames.indexOf(value.name) == -1) {
@@ -80,8 +78,6 @@ $.each(obj, function(key, value) {
 2. User Selects .select()  unique keywords from json file  --   DONE
   a. load the drop down with the unique keyword
   b. load  " hide old /new images " when keyword is selected.
-
 */
 
 // .hide() for when clicked and re-create the html.
-
