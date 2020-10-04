@@ -12,6 +12,7 @@ $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
     });
 
     populateDropdown();
+
     // numberSort();  //Sort by Number of Horns
     imgArr.forEach((typeOfAnimal) => {
       $('main').append(typeOfAnimal.createHTML());
@@ -24,6 +25,7 @@ function Hornsgallery(src) {
   this.title = src.title;
   this.description = src.description;
   this.keyword = src.keyword;
+
   this.horns = src.horns;
 
   imgArr.push(this);
@@ -38,6 +40,12 @@ Hornsgallery.prototype.renderJquery = function () {
   $animalsTemplate.append($newUrl);
 };
 
+Hornsgallery.prototype.createHTML = function(){
+  let template = $('#photo-template').html();
+  let html = Mustache.render(template, this);
+  return html;
+};
+
 const populateDropdown = () => {
   const $default = $('select');
   imgArr.forEach((animal) => {
@@ -47,16 +55,66 @@ const populateDropdown = () => {
   });
 
   keywordArray.forEach((keyword) => {
-    const $newDefault = $(`<option value = '${keyword}'> ${keyword} </option>`);
+    const $newDefault = $(`<option value='${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
   });
 };
+
+// imgArr.forEach(function(storedImages){
+//   if('rhino' === storedImages.keyword){
+//     const imageTitle = storedImages.title;
+//     const imageListItems = $('li');
+//     imageListItems.each(function(){
+//       console.log(imageTitle);
+//       if($(this).find('h2').text() === imageTitle){
+//         $(this).show();
+//         console.log($(this), 'i found it');
+//       }
+//     });
+//   }
+// });
+
+// target keyword on change, change the display to 
+$('select').on('change', function(){
+  $('section').hide();
+  $('section').each((index, element) => {
+    if (this.value === $(element).attr('data-keyword')){
+      $(element).show();
+    }
+    else if (this.value === 'default'){
+      $('section').show();
+    }
+  });
+});
+
+// function sortbyKeyword(keyword) {
+//   console.log('test');
+//   clearElements();
+//   let filteredArr = [];
+//   for (let i = 0; i < imgArr.length; i++) {
+//     if (imgArr[i].keyword === keyword){
+//       filteredArr.push(imgArr[i]);
+//     }
+//   }
+//   filteredArr.forEach((typeOfAnimal) => {
+//     $('main').append(typeOfAnimal.createHTML());
+//   });
+// }
+
+
+// function clearElements() {
+//   $('main').empty();
+// }
 
 /* TODO:  Filter by Keyword
 1. User clicks on Dropdown - eventHandler?
 2. User Selects .select()  unique keywords from json file  --   DONE
   a. load the drop down with the unique keyword
   b. load  " hide old /new images " when keyword is selected.
+  
 */
+
+// create new array with selected keywords
+
 
 // .hide() for when clicked and re-create the html.
