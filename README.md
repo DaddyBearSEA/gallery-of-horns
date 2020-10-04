@@ -37,3 +37,14 @@ Each will do the Retro
 
 I fixed the FETCH problem? I think
 
+
+## Saturday - 10/03/2020
+
+### Cody drove / Michael navigated
+
+#### 2:30 PM - 8:15 PM
+
+- Mustache installed
+- Keyword sorting finished
+- Refactored code
+- CSS styling
