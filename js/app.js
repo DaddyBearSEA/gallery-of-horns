@@ -60,6 +60,21 @@ const populateDropdown = () => {
   });
 };
 
+// target keyword on change, change the display to 
+$('select').on('change', function(){
+  $('section').hide();
+  $('section').each((index, element) => {
+    if (this.value === $(element).attr('data-keyword')){
+      $(element).show();
+      console.log(element);
+    }
+    else if (this.value === 'default'){
+      console.log(element);
+      $('section').show();
+    }
+  });
+});
+
 // imgArr.forEach(function(storedImages){
 //   if('rhino' === storedImages.keyword){
 //     const imageTitle = storedImages.title;
@@ -74,18 +89,6 @@ const populateDropdown = () => {
 //   }
 // });
 
-// target keyword on change, change the display to 
-$('select').on('change', function(){
-  $('section').hide();
-  $('section').each((index, element) => {
-    if (this.value === $(element).attr('data-keyword')){
-      $(element).show();
-    }
-    else if (this.value === 'default'){
-      $('section').show();
-    }
-  });
-});
 
 // function sortbyKeyword(keyword) {
 //   console.log('test');
