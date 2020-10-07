@@ -12,7 +12,7 @@ $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
     });
 
     populateDropdown();
-    numberSort();  //Sort by Number of Horns
+    // hornSort();  //Sort by Number of Horns
 
     imgArr.forEach((typeOfAnimal) => {
       $('main').append(typeOfAnimal.createHTML());
@@ -58,10 +58,8 @@ $('select').on('change', function () {
   $('section').each((index, element) => {
     if (this.value === $(element).attr('class')) {
       $(element).show();
-      console.log('on click here');
     }
     else if (this.value === 'default') {
-      // console.log(element);
       $('section').show();
     }
   });
@@ -77,7 +75,31 @@ $('select').on('change', function () {
 2. onclick eventListner change back to page 1
 
 */
+document.getElementById('button2').addEventListener('click', loadPage2);
 
+function loadPage2() {
+  console.log('hello page 2');
+
+  let page1 = document.getElementsById('photo-template');
+  page1.remove();
+  
+  console.log('good bye page 1 hello page 2');
+  $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
+    .then(potato => {
+      potato.forEach(animalsVal => {
+        new Hornsgallery(animalsVal).createHTML();
+      });
+
+      populateDropdown();
+      // hornSort();  //Sort by Number of Horns
+
+      imgArr.forEach((typeOfAnimal) => {
+        $('main').append(typeOfAnimal.createHTML());
+      });
+    }
+    );
+
+}
 
 
 // -----  Sort on number of horns -----//
