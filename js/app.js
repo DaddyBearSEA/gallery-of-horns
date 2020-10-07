@@ -10,7 +10,11 @@ let imgArr = [];
 
 function loadPage1() {
   $('main').empty();
+  $('select').empty();
   imgArr = [];
+  keywordArray = [];
+  console.log('build page 1: ');
+  console.log(keywordArray);
   $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
     .then(page1 => {
       page1.forEach(animalsVal => {
@@ -30,7 +34,10 @@ function loadPage1() {
 function loadPage2() {
 
   $('main').empty();
+  $('select').empty();
   imgArr = [];
+  keywordArray = [];
+  console.log(' Begining of page rendering: ', keywordArray);
   $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
     .then(page2 => {
       page2.forEach(animalsVal => {
@@ -74,10 +81,12 @@ const populateDropdown = () => {
       keywordArray.push(animal.keyword);
     }
   });
-
+  console.log('build the dropdown!');
+ 
   keywordArray.forEach((keyword) => {
     const $newDefault = $(`<option value='${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
+    
   });
 };
 
@@ -108,15 +117,6 @@ document.getElementById('button2').addEventListener('click', loadPage2);
 // TODO: 
 // ======  Setup Page 2 ============//
 /* 
-1. onclick eventlisterner to change to the second page -- DONE!
-  a. eventlistner on page 2 - DONE!
-  b. display all images from json2  - DONE!
-  c. TODO: sort on Keyword on page 2 it's currently showing all
-
-2. onclick eventListner change back to page 1 - DONE!
-
-3. wrap each click event with a function - DONE!
-  a. call page 1 function at the bottom of the page - DONE!
-  b - TODO:  STRETCH GOAL - put a varaible into the function based on click and load. [dry code]
+ TODO:  STRETCH GOAL - put a varaible into the function based on click and load. [dry code]
 
 */
