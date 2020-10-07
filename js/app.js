@@ -5,20 +5,49 @@ let $horns = $('.animals');
 let keywordArray = [];
 let imgArr = [];
 
-$.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
-  .then(potato => {
-    potato.forEach(animalsVal => {
-      new Hornsgallery(animalsVal).createHTML();
-    });
+function loadPage1() {
+  $('main').empty();
+  imgArr = [];
+  $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
+    .then(page1 => {
+      page1.forEach(animalsVal => {
+        new Hornsgallery(animalsVal).createHTML();
+      });
 
-    populateDropdown();
-    // hornSort();  //Sort by Number of Horns
+      populateDropdown();
+      // hornSort();  //Sort by Number of Horns
 
-    imgArr.forEach((typeOfAnimal) => {
-      $('main').append(typeOfAnimal.createHTML());
-    });
-  }
-  );
+      imgArr.forEach((typeOfAnimal) => {
+        $('main').append(typeOfAnimal.createHTML());
+      });
+    }
+    );
+};
+
+function loadPage2() {
+
+  $('main').empty();
+  imgArr = [];
+  $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
+    .then(page2 => {
+      page2.forEach(animalsVal => {
+        new Hornsgallery(animalsVal).createHTML();
+      });
+
+      populateDropdown();
+      // hornSort();  //Sort by Number of Horns
+
+      imgArr.forEach((typeOfAnimal) => {
+        $('main').append(typeOfAnimal.createHTML());
+      });
+    }
+    );
+
+}
+
+
+
+
 
 function Hornsgallery(src) {
   this.src = src.image_url;
@@ -65,6 +94,14 @@ $('select').on('change', function () {
   });
 });
 
+
+loadPage1();
+/*  --------  Load page based on page number click ----- */
+document.getElementById('button1').addEventListener('click', loadPage1);
+document.getElementById('button2').addEventListener('click', loadPage2);
+
+
+
 // ======  Setup Page 2 ============//
 /* 
 1. onclick eventlisterner to change to the second page
@@ -74,16 +111,17 @@ $('select').on('change', function () {
 
 2. onclick eventListner change back to page 1
 
+3. wrap each click event with a function
+  a. call page 1 function at the bottom of the page
+  b - STRETCH GOAL - put a varaible into the function based on click and load.
+
 */
 document.getElementById('button2').addEventListener('click', loadPage2);
 
 function loadPage2() {
-  console.log('hello page 2');
 
-  let page1 = document.getElementsById('photo-template');
-  page1.remove();
-  
-  console.log('good bye page 1 hello page 2');
+  $('main').empty();
+  imgArr = [];
   $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
     .then(potato => {
       potato.forEach(animalsVal => {
