@@ -8,12 +8,12 @@ let imgArr = [];
 $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
   .then(potato => {
     potato.forEach(animalsVal => {
-      new Hornsgallery(animalsVal).renderJquery();
+      new Hornsgallery(animalsVal).createHTML();
     });
 
     populateDropdown();
+    numberSort();  //Sort by Number of Horns
 
-    // numberSort();  //Sort by Number of Horns
     imgArr.forEach((typeOfAnimal) => {
       $('main').append(typeOfAnimal.createHTML());
     });
@@ -25,20 +25,11 @@ function Hornsgallery(src) {
   this.title = src.title;
   this.description = src.description;
   this.keyword = src.keyword;
-
   this.horns = src.horns;
 
   imgArr.push(this);
 }
 
-Hornsgallery.prototype.renderJquery = function () {
-  let $newUrl = $horns.clone();
-  $newUrl.attr('class', `${this.keyword}`);
-  $newUrl.find('h2').text(this.title);
-  $newUrl.find('img').attr('src', this.src);
-  $newUrl.find('p').text(this.description);
-  $animalsTemplate.append($newUrl);
-};
 
 Hornsgallery.prototype.createHTML = function(){
   let template = $('#photo-template').html();
@@ -60,20 +51,39 @@ const populateDropdown = () => {
   });
 };
 
-// target keyword on change, change the display to 
-$('select').on('change', function(){
+// target keyword on change, change the display to choice
+$('select').on('change', function () {
   $('section').hide();
+  $('section').remove('.class');
   $('section').each((index, element) => {
-    if (this.value === $(element).attr('data-keyword')){
+    if (this.value === $(element).attr('class')) {
       $(element).show();
-      console.log(element);
+      console.log('on click here');
     }
-    else if (this.value === 'default'){
-      console.log(element);
+    else if (this.value === 'default') {
+      // console.log(element);
       $('section').show();
     }
   });
 });
+
+// ======  Setup Page 2 ============//
+/* 
+1. onclick eventlisterner to change to the second page
+  a. eventlistner on page 2
+  b. display all images from json2 
+  c. sort on Keyword on page 2
+
+2. onclick eventListner change back to page 1
+
+*/
+
+
+
+// -----  Sort on number of horns -----//
+
+
+
 
 // imgArr.forEach(function(storedImages){
 //   if('rhino' === storedImages.keyword){
@@ -121,3 +131,14 @@ $('select').on('change', function(){
 
 
 // .hide() for when clicked and re-create the html.
+
+
+
+// Hornsgallery.prototype.renderJquery = function () {
+//   let $newUrl = $horns.clone();
+//   $newUrl.attr('class', `${this.keyword}`);
+//   $newUrl.find('h2').text(this.title);
+//   $newUrl.find('img').attr('src', this.src);
+//   $newUrl.find('p').text(this.description);
+//   $animalsTemplate.append($newUrl);
+// };
