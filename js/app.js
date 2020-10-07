@@ -1,9 +1,12 @@
 'use strict';
 
-let $animalsTemplate = $('.animalsTemplate');
-let $horns = $('.animals');
+// let $animalsTemplate = $('.animalsTemplate');  // not used now with mustache
+// let $horns = $('.animals'); // not used now with mustache
 let keywordArray = [];
 let imgArr = [];
+
+
+/* ----  Loading page 1 and page 2 JSON files by Function */
 
 function loadPage1() {
   $('main').empty();
@@ -22,7 +25,7 @@ function loadPage1() {
       });
     }
     );
-};
+}
 
 function loadPage2() {
 
@@ -46,8 +49,7 @@ function loadPage2() {
 }
 
 
-
-
+/* constructor and Prototype to diplay pages  */
 
 function Hornsgallery(src) {
   this.src = src.image_url;
@@ -58,7 +60,6 @@ function Hornsgallery(src) {
 
   imgArr.push(this);
 }
-
 
 Hornsgallery.prototype.createHTML = function(){
   let template = $('#photo-template').html();
@@ -80,7 +81,8 @@ const populateDropdown = () => {
   });
 };
 
-// target keyword on change, change the display to choice
+/* target keyword on change, change the display to choice */
+
 $('select').on('change', function () {
   $('section').hide();
   $('section').remove('.class');
@@ -95,110 +97,26 @@ $('select').on('change', function () {
 });
 
 
+/*  -----------------  function calls and event listerner ---------*/
+
 loadPage1();
 /*  --------  Load page based on page number click ----- */
 document.getElementById('button1').addEventListener('click', loadPage1);
 document.getElementById('button2').addEventListener('click', loadPage2);
 
 
-
+// TODO: 
 // ======  Setup Page 2 ============//
 /* 
-1. onclick eventlisterner to change to the second page
-  a. eventlistner on page 2
-  b. display all images from json2 
-  c. sort on Keyword on page 2
+1. onclick eventlisterner to change to the second page -- DONE!
+  a. eventlistner on page 2 - DONE!
+  b. display all images from json2  - DONE!
+  c. TODO: sort on Keyword on page 2 it's currently showing all
 
-2. onclick eventListner change back to page 1
+2. onclick eventListner change back to page 1 - DONE!
 
-3. wrap each click event with a function
-  a. call page 1 function at the bottom of the page
-  b - STRETCH GOAL - put a varaible into the function based on click and load.
+3. wrap each click event with a function - DONE!
+  a. call page 1 function at the bottom of the page - DONE!
+  b - TODO:  STRETCH GOAL - put a varaible into the function based on click and load. [dry code]
 
 */
-document.getElementById('button2').addEventListener('click', loadPage2);
-
-function loadPage2() {
-
-  $('main').empty();
-  imgArr = [];
-  $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
-    .then(potato => {
-      potato.forEach(animalsVal => {
-        new Hornsgallery(animalsVal).createHTML();
-      });
-
-      populateDropdown();
-      // hornSort();  //Sort by Number of Horns
-
-      imgArr.forEach((typeOfAnimal) => {
-        $('main').append(typeOfAnimal.createHTML());
-      });
-    }
-    );
-
-}
-
-
-// -----  Sort on number of horns -----//
-
-
-
-
-// imgArr.forEach(function(storedImages){
-//   if('rhino' === storedImages.keyword){
-//     const imageTitle = storedImages.title;
-//     const imageListItems = $('li');
-//     imageListItems.each(function(){
-//       console.log(imageTitle);
-//       if($(this).find('h2').text() === imageTitle){
-//         $(this).show();
-//         console.log($(this), 'i found it');
-//       }
-//     });
-//   }
-// });
-
-
-// function sortbyKeyword(keyword) {
-//   console.log('test');
-//   clearElements();
-//   let filteredArr = [];
-//   for (let i = 0; i < imgArr.length; i++) {
-//     if (imgArr[i].keyword === keyword){
-//       filteredArr.push(imgArr[i]);
-//     }
-//   }
-//   filteredArr.forEach((typeOfAnimal) => {
-//     $('main').append(typeOfAnimal.createHTML());
-//   });
-// }
-
-
-// function clearElements() {
-//   $('main').empty();
-// }
-
-/* TODO:  Filter by Keyword
-1. User clicks on Dropdown - eventHandler?
-2. User Selects .select()  unique keywords from json file  --   DONE
-  a. load the drop down with the unique keyword
-  b. load  " hide old /new images " when keyword is selected.
-  
-*/
-
-// create new array with selected keywords
-
-
-// .hide() for when clicked and re-create the html.
-
-
-
-// Hornsgallery.prototype.renderJquery = function () {
-//   let $newUrl = $horns.clone();
-//   $newUrl.attr('class', `${this.keyword}`);
-//   $newUrl.find('h2').text(this.title);
-//   $newUrl.find('img').attr('src', this.src);
-//   $newUrl.find('p').text(this.description);
-//   $animalsTemplate.append($newUrl);
-// };
