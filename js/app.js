@@ -17,13 +17,8 @@ function loadPage1() {
       page1.forEach(animalsVal => {
         new Hornsgallery(animalsVal).createHTML();
       });
-
       populateDropdown();
-      // hornSort();  //Sort by Number of Horns
-
-      imgArr.forEach((typeOfAnimal) => {
-        $('main').append(typeOfAnimal.createHTML());
-      });
+      renderHTML(imgArr);
     }
     );
 }
@@ -40,17 +35,11 @@ function loadPage2() {
       page2.forEach(animalsVal => {
         new Hornsgallery(animalsVal).createHTML();
       });
-
       populateDropdown();
-      // hornSort();  //Sort by Number of Horns - Dry code?
-      // renderHTML(imgArr); -- Dry Code
-      imgArr.forEach((typeOfAnimal) => {
-        $('main').append(typeOfAnimal.createHTML());
-      });
+      renderHTML(imgArr);
     });
 
 }
-
 
 /* constructor and Prototype to diplay pages  */
 
@@ -99,16 +88,7 @@ $('select').on('change', function () {
   });
 });
 
-/* -----------   Render HTML function ------------ */
-function renderHTML(imgArr) {
-  $('main').empty(); // render image function 
-  imgArr.forEach((typeOfAnimal) => {
-    $('main').append(typeOfAnimal.createHTML());
-  });
-}
-
-
-/* ---- Sorting by Alpha and Number of Horns  -----*/
+/* ---- Sorting by Alpha   -----*/
 function sortImages() {
   console.log('your hit sortImages');
   imgArr.sort(function (a, b) {
@@ -125,8 +105,8 @@ function sortImages() {
   renderHTML(imgArr);
 }
 
+/* ---- Sorting by Number of Horns  -----*/
 function sortHorns() {
-  console.log('you made it to SORTHORNS');
   imgArr.sort(function (a, b) {
     let firstElement = a.horns
     let secondElement = b.horns
@@ -141,6 +121,13 @@ function sortHorns() {
   renderHTML(imgArr);
 }
 
+/* -----------   Render HTML function ------------ */
+function renderHTML(imgArr) {
+  $('main').empty(); 
+  imgArr.forEach((typeOfAnimal) => {
+    $('main').append(typeOfAnimal.createHTML());
+  });
+}
 
 /*  -----------------  function calls and event listerner ---------*/
 
