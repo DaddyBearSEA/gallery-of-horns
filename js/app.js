@@ -13,8 +13,7 @@ function loadPage1() {
   $('select').empty();
   imgArr = [];
   keywordArray = [];
-  console.log('build page 1: ');
-  console.log(keywordArray);
+
   $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
     .then(page1 => {
       page1.forEach(animalsVal => {
@@ -37,7 +36,7 @@ function loadPage2() {
   $('select').empty();
   imgArr = [];
   keywordArray = [];
-  console.log(' Begining of page rendering: ', keywordArray);
+
   $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
     .then(page2 => {
       page2.forEach(animalsVal => {
@@ -81,13 +80,11 @@ const populateDropdown = () => {
       keywordArray.push(animal.keyword);
     }
   });
-  console.log('build the dropdown!');
- 
   keywordArray.forEach((keyword) => {
     const $newDefault = $(`<option value='${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
-    
   });
+
 };
 
 /* target keyword on change, change the display to choice */
@@ -104,6 +101,29 @@ $('select').on('change', function () {
     }
   });
 });
+/* ---- Sorting by Alpha and Number of Horns  -----*/
+function sortImages() {
+  imgArr.sort(function (a, b) {
+    let firstElement = a.title.toLowerCase();
+    let secondElement = b.title.toLowerCase();
+    if (firstElement < secondElement) {
+      return -1;
+    }
+    if (firstElement > secondElement) {
+      return 1;
+    }
+    return 0;
+  });
+  createHTML
+}
+
+function sortHorns() {
+  imgArr.sort(function (a, b) {
+    a.toLowerCase();
+    b.toLowerCase();
+    return a - b;
+  });
+}
 
 
 /*  -----------------  function calls and event listerner ---------*/
@@ -112,6 +132,8 @@ loadPage1();
 /*  --------  Load page based on page number click ----- */
 document.getElementById('button1').addEventListener('click', loadPage1);
 document.getElementById('button2').addEventListener('click', loadPage2);
+// document.getElementById('buttonTitle').addEventListener('click', sortImages);
+// document.getElementById('buttonhorns').addEventListener('click', sortHorns);
 
 
 // TODO: 
@@ -119,4 +141,13 @@ document.getElementById('button2').addEventListener('click', loadPage2);
 /* 
  TODO:  STRETCH GOAL - put a varaible into the function based on click and load. [dry code]
 
+ TODO: -----------------   Sorting  -----------------
+ Feature 4: Sort the images
+** As a user, I want to be able to sort the images so that there is an order to their rendering. **
+
+Given that a user is presented with sort options When the user clicks on one option Then the images should be sorted accordingly
+
+1. Add the ability for the user to sort the images by title.
+2. Add the Ability for the User to sort by number of horns.
+NOTE: This should also apply to the second page of images.
 */
