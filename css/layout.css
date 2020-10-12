@@ -6,18 +6,18 @@ How are we implementing it?
 2 . Utilize at least one Google font. 
 
 */
-*{
+/* *{
   background-color: honeydew;
-}
+} */
 
-
+/* 
 header, div {
   text-align: center;
   margin-bottom: 50px;
 
-}
+} */
 h1{
-  font-family: 'Amatic SC', cursive;
+  /* font-family: 'Amatic SC', cursive; */
   font-weight: bold;
   font-size: 72px;
   text-align: center;
@@ -34,10 +34,7 @@ main {  /* this is the container */
 
 
 section {
-  /* outline: dotted 10px greenyellow; */
-  /* background-color: hotpink; */
   align-items: center;
-  /* flex-grow: 4; */
   align-self: center;
   margin-bottom: 20px;
 
@@ -51,22 +48,17 @@ section {
 
 }
 
-.animals {
-  /* outline: 3px black dashed;
-  outline: fuchsia 2px solid; */
-}
-
 section > h2 {
-  font-family: 'Amatic SC', cursive;
+  /* font-family: 'Amatic SC', cursive; */
   font-weight: bolder;
   font-size: xx-large;
 }
-img {
+/* img {
   height: 200px;
   
-}
+} */
 
-p {
+/* p {
   font-family: 'Amatic SC', cursive;
   
-}
+} */
