@@ -1,7 +1,5 @@
 'use strict';
 
-// let $animalsTemplate = $('.animalsTemplate');  // not used now with mustache
-// let $horns = $('.animals'); // not used now with mustache
 let keywordArray = [];
 let imgArr = [];
 
@@ -13,8 +11,7 @@ function loadPage1() {
   $('select').empty();
   imgArr = [];
   keywordArray = [];
-  console.log('build page 1: ');
-  console.log(keywordArray);
+
   $.ajax('./data/page-1.json', { method: 'get', datatype: 'json' })
     .then(page1 => {
       page1.forEach(animalsVal => {
@@ -37,7 +34,7 @@ function loadPage2() {
   $('select').empty();
   imgArr = [];
   keywordArray = [];
-  console.log(' Begining of page rendering: ', keywordArray);
+
   $.ajax('./data/page-2.json', { method: 'get', datatype: 'json' })
     .then(page2 => {
       page2.forEach(animalsVal => {
@@ -45,13 +42,12 @@ function loadPage2() {
       });
 
       populateDropdown();
-      // hornSort();  //Sort by Number of Horns
-
+      // hornSort();  //Sort by Number of Horns - Dry code?
+      // renderHTML(imgArr); -- Dry Code
       imgArr.forEach((typeOfAnimal) => {
         $('main').append(typeOfAnimal.createHTML());
       });
-    }
-    );
+    });
 
 }
 
@@ -81,13 +77,11 @@ const populateDropdown = () => {
       keywordArray.push(animal.keyword);
     }
   });
-  console.log('build the dropdown!');
- 
   keywordArray.forEach((keyword) => {
     const $newDefault = $(`<option value='${keyword}'> ${keyword} </option>`);
     $default.append($newDefault);
-    
   });
+
 };
 
 /* target keyword on change, change the display to choice */
@@ -105,17 +99,60 @@ $('select').on('change', function () {
   });
 });
 
+/* -----------   Render HTML function ------------ */
+function renderHTML(imgArr) {
+  $('main').empty(); // render image function 
+  imgArr.forEach((typeOfAnimal) => {
+    $('main').append(typeOfAnimal.createHTML());
+  });
+}
+
+
+/* ---- Sorting by Alpha and Number of Horns  -----*/
+function sortImages() {
+  console.log('your hit sortImages');
+  imgArr.sort(function (a, b) {
+    let firstElement = a.title.toLowerCase();
+    let secondElement = b.title.toLowerCase();
+    if (firstElement < secondElement) {
+      return -1;
+    }
+    if (firstElement > secondElement) {
+      return 1;
+    }
+    return 0;
+  });
+  renderHTML(imgArr);
+}
+
+function sortHorns() {
+  console.log('you made it to SORTHORNS');
+  imgArr.sort(function (a, b) {
+    let firstElement = a.horns
+    let secondElement = b.horns
+    if (firstElement < secondElement) {
+      return -1;
+    }
+    if (firstElement > secondElement) {
+      return 1;
+    }
+    return 0;
+  });
+  renderHTML(imgArr);
+}
+
 
 /*  -----------------  function calls and event listerner ---------*/
 
 loadPage1();
+
 /*  --------  Load page based on page number click ----- */
 document.getElementById('button1').addEventListener('click', loadPage1);
 document.getElementById('button2').addEventListener('click', loadPage2);
+document.getElementById('buttonHorns').addEventListener('click', sortHorns);
+document.getElementById('buttonTitle').addEventListener('click', sortImages);
 
 
-// TODO: 
-// ======  Setup Page 2 ============//
 /* 
  TODO:  STRETCH GOAL - put a varaible into the function based on click and load. [dry code]
 
