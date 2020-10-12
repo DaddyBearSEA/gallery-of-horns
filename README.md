@@ -48,3 +48,31 @@ I fixed the FETCH problem? I think
 - Keyword sorting finished
 - Refactored code
 - CSS styling
+
+#### Tuesday, Oct 6, 2020
+
+Michael
+pushed to live site to test
+
+#### Wednesday Oct 7, 2020
+Michael
+Issues:
+FIXED - duplicates with help from Scott F
+FIXED - display first page, then onClick to display 2nd page
+Issue: Keyword function needs to be fixed as it's loading all keywords from both Json files
+Issue: Still need Sorting by Horns and Alphabetical.
+Issue: Fix CSS to wrap text on the animals that have long paragraph elements.
+
+#### Monday Oct 12, 2020 
+
+Michael
+
+**8:30 - 9:30 AM**
+
+- worked on formatting CSS and some JS getting familiar - looking at dry coding project.
+
+**11:45 AM - 2 PM**
+
+- worked on getting the sorting by Alpha and Horns working with help from Skylar TA
+- worked on CSS to finish up formatting for SMACSS
+- Cleaned up README

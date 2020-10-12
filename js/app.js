@@ -1,7 +1,5 @@
 'use strict';
 
-// let $animalsTemplate = $('.animalsTemplate');  // not used now with mustache
-// let $horns = $('.animals'); // not used now with mustache
 let keywordArray = [];
 let imgArr = [];
 
@@ -44,8 +42,8 @@ function loadPage2() {
       });
 
       populateDropdown();
-      // hornSort();  //Sort by Number of Horns
-      // renderHTML(imgArr);
+      // hornSort();  //Sort by Number of Horns - Dry code?
+      // renderHTML(imgArr); -- Dry Code
       imgArr.forEach((typeOfAnimal) => {
         $('main').append(typeOfAnimal.createHTML());
       });
@@ -101,12 +99,13 @@ $('select').on('change', function () {
   });
 });
 
+/* -----------   Render HTML function ------------ */
 function renderHTML(imgArr) {
   $('main').empty(); // render image function 
   imgArr.forEach((typeOfAnimal) => {
     $('main').append(typeOfAnimal.createHTML());
   });
-};
+}
 
 
 /* ---- Sorting by Alpha and Number of Horns  -----*/
@@ -129,10 +128,15 @@ function sortImages() {
 function sortHorns() {
   console.log('you made it to SORTHORNS');
   imgArr.sort(function (a, b) {
-    console.log('You made it to array SORTHORNS');
-    // a.toLowerCase();
-    // b.toLowerCase();
-    return a - b;
+    let firstElement = a.horns
+    let secondElement = b.horns
+    if (firstElement < secondElement) {
+      return -1;
+    }
+    if (firstElement > secondElement) {
+      return 1;
+    }
+    return 0;
   });
   renderHTML(imgArr);
 }
@@ -141,6 +145,7 @@ function sortHorns() {
 /*  -----------------  function calls and event listerner ---------*/
 
 loadPage1();
+
 /*  --------  Load page based on page number click ----- */
 document.getElementById('button1').addEventListener('click', loadPage1);
 document.getElementById('button2').addEventListener('click', loadPage2);
@@ -148,18 +153,7 @@ document.getElementById('buttonHorns').addEventListener('click', sortHorns);
 document.getElementById('buttonTitle').addEventListener('click', sortImages);
 
 
-// TODO: 
-// ======  Setup Page 2 ============//
 /* 
  TODO:  STRETCH GOAL - put a varaible into the function based on click and load. [dry code]
 
- TODO: -----------------   Sorting  -----------------
- Feature 4: Sort the images
-** As a user, I want to be able to sort the images so that there is an order to their rendering. **
-
-Given that a user is presented with sort options When the user clicks on one option Then the images should be sorted accordingly
-
-1. Add the ability for the user to sort the images by title.
-2. Add the Ability for the User to sort by number of horns.
-NOTE: This should also apply to the second page of images.
 */
